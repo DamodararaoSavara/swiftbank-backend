@@ -36,7 +36,7 @@ It implements JWT-based authentication, OTP verification, Redis caching, and rol
 
     -> Global exception handling
 
-##  📩 Communication
+## 📩 Communication
 
     -> SMS OTP using Twilio
 
