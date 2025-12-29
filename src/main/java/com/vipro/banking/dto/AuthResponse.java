@@ -1,0 +1,8 @@
+package com.vipro.banking.dto;
+
+import java.util.List;
+
+public record AuthResponse(String token,
+                           List<String> roles,
+                           Long userId) {
+}
