@@ -1,10 +1,10 @@
-🏦 SwiftBank Backend – Secure Digital Banking API
+# 🏦 SwiftBank Backend – Secure Digital Banking API
 
 SwiftBank Backend is a secure, scalable digital banking REST API built using Spring Boot.
 It implements JWT-based authentication, OTP verification, Redis caching, and role-based authorization to simulate real-world banking operations.
 
-🚀 Features
-🔐 Authentication & Security
+## 🚀 Features
+## 🔐 Authentication & Security
 
     -> JWT Authentication & Authorization
 
@@ -16,7 +16,7 @@ It implements JWT-based authentication, OTP verification, Redis caching, and rol
 
     -> Password encryption using BCrypt
 
-💳 Banking Operations
+## 💳 Banking Operations
 
     -> Account creation & management
 
@@ -26,7 +26,7 @@ It implements JWT-based authentication, OTP verification, Redis caching, and rol
 
     -> Admin account control (activate / deactivate users)
  
- ⚡ Performance & Reliability
+ ## ⚡ Performance & Reliability
 
     -> Redis caching for faster reads
 
@@ -36,13 +36,13 @@ It implements JWT-based authentication, OTP verification, Redis caching, and rol
 
     -> Global exception handling
 
-📩 Communication
+## 📩 Communication
 
     -> SMS OTP using Twilio
 
     -> Email service for notifications
 
-🛠 Tech Stack
+## 🛠 Tech Stack
 Layer	Technology
 Backend	Java 17
 Framework	Spring Boot
@@ -53,7 +53,7 @@ Messaging	Twilio SMS, Java Mail
 Build Tool	Maven
 API Style	RESTful
 
-🧱 Project Architecture
+## 🧱 Project Architecture
 com.vipro.banking
 ├── config          # Security & cache configuration
 ├── controller      # REST APIs
@@ -69,7 +69,7 @@ com.vipro.banking
 ├── service.impl    # Business logic implementations
 ├── utility         # OTP & password utilities
 
-🔁 Authentication Flow (JWT + OTP)
+## 🔁 Authentication Flow (JWT + OTP)
 User Login
    ↓
 Validate Credentials
@@ -82,8 +82,8 @@ Generate JWT Token
    ↓
 Access Secured APIs
 
-📡 API Highlights
-🔑 Authentication
+## 📡 API Highlights
+### 🔑 Authentication
 
 POST /api/auth/login
 
@@ -91,7 +91,7 @@ POST /api/auth/verify-otp
 
 POST /api/auth/register
 
-💰 Banking
+### 💰 Banking
 
 POST /api/account/transfer
 
@@ -99,13 +99,13 @@ GET /api/account/transactions
 
 GET /api/account/profile
 
-🛠 Admin
+### 🛠 Admin
 
 PUT /api/admin/account/lock
 
 PUT /api/admin/account/unlock
 
-⚙️ Configuration
+## ⚙️ Configuration
 
 Create application.properties :
 
@@ -123,7 +123,7 @@ spring.redis.host=localhost
 spring.redis.port=6379
 
 
-🔐 Important: Use environment variables in production.
+## 🔐 Important: Use environment variables in production.
 
 ▶️ Run the Application
 mvn clean install
@@ -135,7 +135,7 @@ http://localhost:8080
 🧪 Testing
 mvn test
 
-🧠 Key Learnings
+## 🧠 Key Learnings
 
 . Secure authentication using JWT + OTP
 
@@ -147,13 +147,13 @@ mvn test
 
 . GitHub push-protection & secret management
 
-👨‍💻 Author
+## 👨‍💻 Author
 
-Damodararao Savara
-Java Backend Developer
+## *Damodararao Savara*
+## Java Backend Developer
 🔗 GitHub: https://github.com/DamodararaoSavara
 
-📌 Future Enhancements
+## 📌 Future Enhancements
 
 – Dockerization
 
