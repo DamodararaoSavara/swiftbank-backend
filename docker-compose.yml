@@ -1,0 +1,81 @@
+
+services:
+
+  redis:
+    image: redis:7
+    container_name: redis-server
+    ports:
+      - "6379:6379"
+
+  mysql-db:
+    image: mysql:8.0
+    container_name: mysql-db
+    environment:
+      MYSQL_ROOT_PASSWORD: Damusonu@143
+      MYSQL_DATABASE: banking_app
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  banking-app:
+    env_file:
+      - .env
+    build: .
+    container_name: banking-app
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+      TZ: Asia/Kolkata
+    depends_on:
+      - mysql-db
+      - redis
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.11.1
+    container_name: elasticsearch
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+      - bootstrap.memory_lock=true
+      - ES_JAVA_OPTS=-Xms512m -Xmx512m
+    ports:
+      - "9200:9200"
+    healthcheck:
+      test: [ "CMD-SHELL", "curl -f http://localhost:9200/_cluster/health || exit 1" ]
+      interval: 20s
+      timeout: 10s
+      retries: 10
+      start_period: 40s
+    networks:
+      - banking-net
+
+  logstash:
+      image: docker.elastic.co/logstash/logstash:8.11.1
+      container_name: logstash
+      volumes:
+        - ./logstash/logstash.conf:/usr/share/logstash/pipeline/logstash.conf
+      ports:
+        - "5000:5000"
+      depends_on:
+         elasticsearch:
+           condition: service_healthy
+      networks:
+        - banking-net
+
+  kibana:
+      image: docker.elastic.co/kibana/kibana:8.11.1
+      container_name: kibana
+      ports:
+        - "5601:5601"
+      depends_on:
+        - elasticsearch
+      networks:
+        - banking-net
+
+networks:
+  banking-net:
+      driver: bridge
+
+volumes:
+  mysql_data:
