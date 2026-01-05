@@ -32,6 +32,29 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
+    /* ✅ AUTHENTICATION PROVIDER */
+    /*@Bean
+    public AuthenticationProvider authenticationProvider() {
+
+        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
+        provider.setUserDetailsService(userDetailsService);
+        provider.setPasswordEncoder(passwordEncoder());
+
+        return provider;
+    }*/
+    //✅ CORRECT WAY (Spring Boot 3.2+ / Security 6.1+)
+    //🔥 DaoAuthenticationProvider now REQUIRES UserDetailsService in constructor
+    /*@Bean
+    public AuthenticationProvider authenticationProvider() {
+
+        DaoAuthenticationProvider provider =
+                new DaoAuthenticationProvider(userDetailsService);
+
+        provider.setPasswordEncoder(passwordEncoder());
+
+        return provider;
+    }*/
+
     /* ✅ AUTHENTICATION MANAGER */
     @Bean
     public AuthenticationManager authenticationManager(
@@ -71,7 +94,6 @@ public class SecurityConfig {
                                 "/api/auth/reset-password"
 
                         ).permitAll()
-                        .requestMatchers("/actuator/**").permitAll()
                         .requestMatchers(HttpMethod.GET,"/api/auth/is-email-verified").permitAll()
                         .requestMatchers("/api/admin/**").hasRole("ADMIN")
                         .anyRequest().authenticated()
